@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Key Revoked</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2563eb;
+            margin-bottom: 10px;
+        }
+        .alert-badge {
+            display: inline-block;
+            background-color: #fef2f2;
+            color: #991b1b;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-top: 10px;
+            border: 1px solid #fecaca;
+        }
+        h1 {
+            color: #991b1b;
+            font-size: 24px;
+            margin: 20px 0;
+        }
+        .revoked-icon {
+            text-align: center;
+            font-size: 64px;
+            margin: 20px 0;
+        }
+        .key-info {
+            background-color: #f9fafb;
+            border-left: 4px solid #6b7280;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .key-detail {
+            margin: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .key-detail-label {
+            font-weight: 600;
+            color: #6b7280;
+        }
+        .key-detail-value {
+            color: #1f2937;
+            font-family: 'Courier New', monospace;
+        }
+        .status-badge {
+            display: inline-block;
+            background-color: #6b7280;
+            color: #ffffff;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .reason-box {
+            background-color: #fffbeb;
+            border: 1px solid #fcd34d;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .reason-box-title {
+            font-weight: 600;
+            color: #92400e;
+            margin-bottom: 8px;
+        }
+        .reason-text {
+            color: #78350f;
+            font-style: italic;
+        }
+        .action-section {
+            margin: 30px 0;
+            padding: 20px;
+            background-color: #eff6ff;
+            border-radius: 8px;
+        }
+        .action-section h3 {
+            margin-top: 0;
+            color: #1e40af;
+        }
+        .action-button {
+            display: inline-block;
+            background-color: #2563eb;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 12px 30px;
+            border-radius: 6px;
+            font-weight: 600;
+            margin: 10px 10px 10px 0;
+            transition: background-color 0.3s;
+        }
+        .action-button:hover {
+            background-color: #1d4ed8;
+        }
+        .info-list {
+            margin: 20px 0;
+            padding-left: 20px;
+        }
+        .info-list li {
+            margin: 8px 0;
+            color: #4b5563;
+        }
+        .security-notice {
+            background-color: #fef2f2;
+            border: 2px solid #fecaca;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .security-notice-title {
+            font-weight: 600;
+            color: #991b1b;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        .security-notice-title::before {
+            content: "🔒";
+            margin-right: 8px;
+            font-size: 20px;
+        }
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e5e7eb;
+            text-align: center;
+            color: #6b7280;
+            font-size: 14px;
+        }
+        .footer a {
+            color: #2563eb;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">Website Cloner Pro</div>
+            <span class="alert-badge">
+                🛑 API Key Revoked
+            </span>
+        </div>
+
+        <div class="revoked-icon">🔐</div>
+
+        <h1>API Key Has Been Revoked</h1>
+
+        <p>Hello,</p>
+
+        <p>This is to inform you that one of your API keys has been revoked and is no longer active.</p>
+
+        <div class="key-info">
+            <div class="key-detail">
+                <span class="key-detail-label">API Key Name:</span>
+                <span class="key-detail-value">{{apiKeyName}}</span>
+            </div>
+            <div class="key-detail">
+                <span class="key-detail-label">Key Prefix:</span>
+                <span class="key-detail-value">{{keyPrefix}}...</span>
+            </div>
+            <div class="key-detail">
+                <span class="key-detail-label">Revoked On:</span>
+                <span class="key-detail-value">{{revokedDate}}</span>
+            </div>
+            <div class="key-detail">
+                <span class="key-detail-label">Revoked By:</span>
+                <span class="key-detail-value">{{revokedBy}}</span>
+            </div>
+            <div class="key-detail">
+                <span class="key-detail-label">Status:</span>
+                <span class="status-badge">REVOKED</span>
+            </div>
+        </div>
+
+        {{#if reason}}
+        <div class="reason-box">
+            <div class="reason-box-title">Revocation Reason:</div>
+            <p class="reason-text">{{reason}}</p>
+        </div>
+        {{/if}}
+
+        <div class="security-notice">
+            <div class="security-notice-title">Security Notice</div>
+            <p style="margin: 0; color: #7f1d1d;">
+                This API key can no longer be used for authentication. Any services or applications using this key will receive authentication errors.
+            </p>
+        </div>
+
+        <div class="action-section">
+            <h3>What This Means:</h3>
+            <ul class="info-list">
+                <li>The API key is permanently disabled and cannot be reactivated</li>
+                <li>All API requests using this key will fail with a 401 Unauthorized error</li>
+                <li>Services using this key should be updated immediately</li>
+                {{#if wasAutoRevoked}}
+                <li><strong>This was an automatic action</strong> due to key expiration</li>
+                {{/if}}
+            </ul>
+        </div>
+
+        <div class="action-section">
+            <h3>Next Steps:</h3>
+            <ul class="info-list">
+                <li>If you still need API access, create a new API key</li>
+                <li>Update any applications or services that were using the revoked key</li>
+                <li>Review your remaining active API keys</li>
+            </ul>
+
+            <a href="{{dashboardUrl}}/api-keys/create" class="action-button">
+                Create New API Key
+            </a>
+            <a href="{{dashboardUrl}}/api-keys" class="action-button">
+                View All Keys
+            </a>
+        </div>
+
+        {{#if suspiciousActivity}}
+        <div class="security-notice">
+            <div class="security-notice-title">Security Alert</div>
+            <p style="margin: 0; color: #7f1d1d;">
+                This revocation may be related to suspicious activity. Please review your account security settings and change your password if necessary.
+            </p>
+        </div>
+        {{/if}}
+
+        <p><strong>Did you revoke this key?</strong> If you did not initiate this revocation, please contact our security team immediately.</p>
+
+        <div class="footer">
+            <p>This is an automated notification from Website Cloner Pro</p>
+            <p>
+                <a href="{{dashboardUrl}}/api-keys">Manage API Keys</a> |
+                <a href="{{dashboardUrl}}/settings/security">Security Settings</a> |
+                <a href="{{supportUrl}}">Contact Support</a>
+            </p>
+            <p style="margin-top: 20px; color: #9ca3af; font-size: 12px;">
+                © {{year}} Website Cloner Pro. All rights reserved.<br>
+                If you didn't request this action, please <a href="{{supportUrl}}" style="color: #ef4444;">report it immediately</a>.
+            </p>
+        </div>
+    </div>
+</body>
+</html>

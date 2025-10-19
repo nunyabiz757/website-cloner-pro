@@ -1,0 +1,104 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-gray-50 text-gray-900 antialiased;
+  }
+
+  * {
+    @apply border-gray-200;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply px-4 py-2 rounded-lg font-medium transition-all duration-200;
+  }
+
+  .btn-primary {
+    @apply btn bg-primary-600 text-white hover:bg-primary-700 active:scale-95;
+  }
+
+  .btn-secondary {
+    @apply btn bg-gray-200 text-gray-700 hover:bg-gray-300 active:scale-95;
+  }
+
+  .btn-success {
+    @apply btn bg-success-500 text-white hover:bg-success-700 active:scale-95;
+  }
+
+  .btn-danger {
+    @apply btn bg-danger-500 text-white hover:bg-danger-700 active:scale-95;
+  }
+
+  .card {
+    @apply bg-white rounded-xl shadow-sm border border-gray-200 p-6;
+  }
+
+  .input {
+    @apply w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent;
+  }
+
+  .badge {
+    @apply px-2 py-1 text-xs font-semibold rounded-full;
+  }
+
+  .badge-critical {
+    @apply badge bg-danger-100 text-danger-700;
+  }
+
+  .badge-high {
+    @apply badge bg-warning-100 text-warning-700;
+  }
+
+  .badge-medium {
+    @apply badge bg-primary-100 text-primary-700;
+  }
+
+  .badge-low {
+    @apply badge bg-gray-100 text-gray-700;
+  }
+
+  .metric-good {
+    @apply text-success-600 bg-success-50;
+  }
+
+  .metric-needs-improvement {
+    @apply text-warning-600 bg-warning-50;
+  }
+
+  .metric-poor {
+    @apply text-danger-600 bg-danger-50;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-400;
+}
+
+/* Loading animation */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}

@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node:*)",
+      "Bash(npm info:*)",
+      "Bash(npm search:*)",
+      "Bash(test:*)",
+      "Bash(npm run build)",
+      "Bash(for file in docs/features/*.md)",
+      "Bash(do echo \"---\")",
+      "Bash(head -n 3 \"$file\")",
+      "Bash(wc -l \"$file\")",
+      "Bash(awk '{print \"\"\"\"Lines: \"\"\"\" $1}')",
+      "Bash(done)",
+      "Bash(npx prisma migrate dev --name add_ghl_paste_tables)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

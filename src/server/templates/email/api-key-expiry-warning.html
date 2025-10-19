@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Key Expiring Soon</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2563eb;
+            margin-bottom: 10px;
+        }
+        .warning-badge {
+            display: inline-block;
+            background-color: #fef3c7;
+            color: #92400e;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+        .warning-badge.urgent {
+            background-color: #fee2e2;
+            color: #991b1b;
+        }
+        h1 {
+            color: #1f2937;
+            font-size: 24px;
+            margin: 20px 0;
+        }
+        .key-info {
+            background-color: #f9fafb;
+            border-left: 4px solid #fbbf24;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .key-info.urgent {
+            border-left-color: #ef4444;
+        }
+        .key-detail {
+            margin: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .key-detail-label {
+            font-weight: 600;
+            color: #6b7280;
+        }
+        .key-detail-value {
+            color: #1f2937;
+            font-family: 'Courier New', monospace;
+        }
+        .expiry-date {
+            font-size: 20px;
+            font-weight: bold;
+            color: #ef4444;
+        }
+        .action-section {
+            margin: 30px 0;
+            padding: 20px;
+            background-color: #eff6ff;
+            border-radius: 8px;
+        }
+        .action-section h3 {
+            margin-top: 0;
+            color: #1e40af;
+        }
+        .action-button {
+            display: inline-block;
+            background-color: #2563eb;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 12px 30px;
+            border-radius: 6px;
+            font-weight: 600;
+            margin: 10px 10px 10px 0;
+            transition: background-color 0.3s;
+        }
+        .action-button:hover {
+            background-color: #1d4ed8;
+        }
+        .action-button.secondary {
+            background-color: #6b7280;
+        }
+        .action-button.secondary:hover {
+            background-color: #4b5563;
+        }
+        .info-list {
+            margin: 20px 0;
+            padding-left: 20px;
+        }
+        .info-list li {
+            margin: 8px 0;
+            color: #4b5563;
+        }
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e5e7eb;
+            text-align: center;
+            color: #6b7280;
+            font-size: 14px;
+        }
+        .footer a {
+            color: #2563eb;
+            text-decoration: none;
+        }
+        .countdown {
+            text-align: center;
+            font-size: 48px;
+            font-weight: bold;
+            color: #fbbf24;
+            margin: 20px 0;
+        }
+        .countdown.urgent {
+            color: #ef4444;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">Website Cloner Pro</div>
+            <span class="warning-badge {{#if isUrgent}}urgent{{/if}}">
+                ⚠️ API Key Expiring Soon
+            </span>
+        </div>
+
+        <h1>Your API Key is Expiring</h1>
+
+        <p>Hello,</p>
+
+        <p>This is a reminder that one of your API keys will expire soon. Please take action to avoid service disruption.</p>
+
+        <div class="countdown {{#if isUrgent}}urgent{{/if}}">
+            {{daysUntilExpiry}} {{#if (eq daysUntilExpiry 1)}}Day{{else}}Days{{/if}}
+        </div>
+
+        <div class="key-info {{#if isUrgent}}urgent{{/if}}">
+            <div class="key-detail">
+                <span class="key-detail-label">API Key Name:</span>
+                <span class="key-detail-value">{{apiKeyName}}</span>
+            </div>
+            <div class="key-detail">
+                <span class="key-detail-label">Key Prefix:</span>
+                <span class="key-detail-value">{{keyPrefix}}...</span>
+            </div>
+            <div class="key-detail">
+                <span class="key-detail-label">Expires On:</span>
+                <span class="expiry-date">{{expiryDate}}</span>
+            </div>
+            <div class="key-detail">
+                <span class="key-detail-label">Created On:</span>
+                <span class="key-detail-value">{{createdDate}}</span>
+            </div>
+        </div>
+
+        <div class="action-section">
+            <h3>What You Can Do:</h3>
+            <ul class="info-list">
+                <li><strong>Extend Expiry:</strong> Update the expiration date to keep the key active</li>
+                <li><strong>Rotate Key:</strong> Generate a new key with the same permissions</li>
+                <li><strong>Revoke Key:</strong> If no longer needed, revoke it to maintain security</li>
+            </ul>
+
+            <a href="{{dashboardUrl}}/api-keys/{{apiKeyId}}" class="action-button">
+                Manage API Key
+            </a>
+            <a href="{{dashboardUrl}}/api-keys/rotate/{{apiKeyId}}" class="action-button secondary">
+                Rotate Key
+            </a>
+        </div>
+
+        <p><strong>Important:</strong> If this key expires without action, it will be automatically revoked and any services using it will stop working.</p>
+
+        <p>If you have any questions or need assistance, please don't hesitate to contact our support team.</p>
+
+        <div class="footer">
+            <p>This is an automated notification from Website Cloner Pro</p>
+            <p>
+                <a href="{{dashboardUrl}}/settings/notifications">Manage Notification Preferences</a> |
+                <a href="{{supportUrl}}">Contact Support</a>
+            </p>
+            <p style="margin-top: 20px; color: #9ca3af; font-size: 12px;">
+                © {{year}} Website Cloner Pro. All rights reserved.
+            </p>
+        </div>
+    </div>
+</body>
+</html>

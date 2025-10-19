@@ -12,7 +12,11 @@
       "Bash(wc -l \"$file\")",
       "Bash(awk '{print \"\"\"\"Lines: \"\"\"\" $1}')",
       "Bash(done)",
-      "Bash(npx prisma migrate dev --name add_ghl_paste_tables)"
+      "Bash(npx prisma migrate dev --name add_ghl_paste_tables)",
+      "Bash(find . -type f -size +1M -exec ls -lh {})",
+      "Bash(awk '{print $5, $9}')",
+      "Bash(xargs -I {} sh -c 'du -h \"\"\"\"{}\"\"\"\" 2>/dev/null')",
+      "Bash(git rm --cached prisma/dev.db)"
     ],
     "deny": [],
     "ask": []

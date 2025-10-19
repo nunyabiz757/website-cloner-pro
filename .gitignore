@@ -61,3 +61,27 @@ Thumbs.db
 *.d.ts.map
 
 /generated/prisma
+
+# Database files
+*.db
+*.db-journal
+*.db-shm
+*.db-wal
+prisma/dev.db
+prisma/*.db
+
+# Lock files (optional - uncomment for bolt.new)
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
+
+# Test and demo files
+test-*.js
+*-test.js
+security-audit.json
+
+# Documentation (keep only essential)
+# COMPREHENSIVE_FEATURE_LIST.md
+# *_SUMMARY.md
+# *_CLEANUP*.md
+# IMPLEMENTATION_PROGRESS.md

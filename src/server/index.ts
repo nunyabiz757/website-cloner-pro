@@ -4,6 +4,10 @@ import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
+// Feature flags and minimal services
+import { logFeatureStatus, features } from '../config/features.js';
+import { getStore, shutdownStore } from './services/InMemoryStore.js';
+
 // Routes
 import cloneRoutes from './routes/clone.js';
 import performanceRoutes from './routes/performance.js';
@@ -152,8 +156,18 @@ app.use((err: any, req: express.Request, res: express.Response, next: express.Ne
 });
 
 app.listen(PORT, async () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
+  console.log(`\n🚀 Server running on http://localhost:${PORT}`);
   console.log(`📊 Environment: ${process.env.NODE_ENV || 'development'}`);
+
+  // Log feature status
+  logFeatureStatus();
+
+  // Initialize in-memory store (minimal mode)
+  if (!features.database) {
+    const store = getStore();
+    console.log('💾 In-memory store initialized (minimal mode)');
+    console.log('   Data will be persisted to ./data directory');
+  }
 
   // Initialize background job scheduler
   try {
@@ -162,18 +176,24 @@ app.listen(PORT, async () => {
   } catch (error) {
     console.error('❌ Failed to initialize job scheduler:', error);
   }
+
+  console.log(`\n✅ Ready! Open http://localhost:${PORT} in your browser\n`);
 });
 
 // Graceful shutdown
 process.on('SIGINT', async () => {
   console.log('\n🛑 Shutting down server...');
   await shutdownScheduler();
+  await shutdownStore();
+  console.log('✅ Shutdown complete');
   process.exit(0);
 });
 
 process.on('SIGTERM', async () => {
   console.log('\n🛑 Shutting down server...');
   await shutdownScheduler();
+  await shutdownStore();
+  console.log('✅ Shutdown complete');
   process.exit(0);
 });
 
